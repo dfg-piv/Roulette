@@ -11,7 +11,7 @@ $vars = array (
     "Spin"  => array("en" => "SPIN AGAIN!", "fr" => "NOUVELLE DONNE"),
     "Page_title"  => array("en" => "Poetry In Voice | Poem Roulette", "fr" => "Les voix de la poésie | À vos jeux"),
 	"Roulette"  => array("en" => "Poem Roulette", "fr" => "À vos jeux"),
-    "More"  => array("en" => "See more", "fr" => "EN SAVOIR PLUS")
+    "More"  => array("en" => "More information", "fr" => "Plus d'information")
 
 
 

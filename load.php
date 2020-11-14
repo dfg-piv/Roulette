@@ -717,7 +717,7 @@ $(window).on("scroll", function() {
 });
 
 appendPoemButton = () => {
-	$("#poem").append("</br><div  class='poemButton' ><a href='' target='_blank' id='visitPoem" + poemIndex + "' onClick='ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));'><?php echo $vars['More'][$lang]; ?></a></div></br>");
+	$("#poem").append("<br><div  class='poemButton' ><a href='' target='_blank' id='visitPoem" + poemIndex + "' onClick='ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));'><?php echo $vars['More'][$lang]; ?></a></div><hr><br>");
 	let poemPath = $("#poemPath" + poemIndex).html();
 	$("#visitPoem" + poemIndex).attr( "href", poemPath );
 }

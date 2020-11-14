@@ -636,7 +636,10 @@ echo $poets;
 
 <script>
 $( document ).ready(function() {
-
+  // Push history and hide slide if browser back button is clicked
+  $(window).on('popstate', function(event) {
+	hideSlide();
+  });
   $( ".slider" ).hide();
 });
 
@@ -650,6 +653,9 @@ $( "#poetUp" ).click(function() {
   $( "#poet-slider" ).hide( "slide" , { direction: "down" }, 500 );
 });
 $( ".slotMachine, .machineResult" ).click(function() {
+  if (history && history.pushState) {
+	history.pushState('forward', null, './#poem');
+  }
   $( "#toggle2" ).show( "slide" , { direction: "left" }, 500 );
   var tagId;
   var c = "<?php echo $c; ?>";													 
@@ -670,15 +676,19 @@ $( ".slotMachine, .machineResult" ).click(function() {
 
 });
 
-
-
-
-$( "#back2" ).click(function() {
+// Method for hiding slide
+hideSlide = function() {
 	$("#poemFooter").fadeOut('fast');
 	$("#poem").fadeOut('fast');
  	$( "#toggle2" ).hide( "slide" , { direction: "left" }, 500 );
-});
+}
 
+$( "#back2" ).click(function() {
+	if (history && history.back) {
+		history.back();
+	}
+	hideSlide();
+});
 
   // Check if the device supports touch events
   if('ontouchstart' in document.documentElement) {

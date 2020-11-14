@@ -676,15 +676,19 @@ $( ".slotMachine, .machineResult" ).click(function() {
 
 });
 
-
-
-
-$( "#back2" ).click(function() {
+// Method for hiding slide
+hideSlide = function() {
 	$("#poemFooter").fadeOut('fast');
 	$("#poem").fadeOut('fast');
  	$( "#toggle2" ).hide( "slide" , { direction: "left" }, 500 );
-});
+}
 
+$( "#back2" ).click(function() {
+	if (history && history.back) {
+		history.back();
+	}
+	hideSlide();
+});
 
   // Check if the device supports touch events
   if('ontouchstart' in document.documentElement) {
@@ -706,19 +710,7 @@ $( "#back2" ).click(function() {
     }
   }
 
-// Method for hiding slide
-hideSlide = function() {
-	$("#poemFooter").fadeOut('fast');
-	$("#poem").fadeOut('fast');
- 	$( "#toggle2" ).hide( "slide" , { direction: "left" }, 500 );
-}
 
-$( "#back2" ).click(function() {
-	if (history && history.back) {
-		history.back();
-	}
-	hideSlide();
-});
 </script>
 
 </div>

@@ -248,7 +248,7 @@ body {
     min-width: 100%;
     height: auto;
     padding-bottom: 80px;
-    min-height: 700px
+    min-height: 100%
 }
 
 .circleContainer,

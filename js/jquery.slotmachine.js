@@ -230,7 +230,7 @@
 	SlotMachine.prototype.getTileOffset = function(index){
 		var offset = 0;
 		for(var i=0; i<index; i++){
-			offset += $( this.$tiles.get(i) ).outerHeight();
+			offset += $( this.$tiles.get(i) )[0].getBoundingClientRect().height;
 		}
 		return - offset + this._minTop;
 	};

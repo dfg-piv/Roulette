@@ -433,12 +433,16 @@ body {
 
 #element_to_pop_up {
 	background-color: #26afed !important;
+    position: fixed !important;
+    top: 45% !important;
+    left: 50% !important;
+    width: 70% !important;
+    transform: translate(-50%, -50%);
     border-radius: 10px;
     box-shadow: 0 0 25px 5px #999;
     display: none;
     padding: 25px;
     color: #001a23;
-    max-width: 90%
 }
 
 .b-close {

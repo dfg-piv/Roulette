@@ -706,7 +706,6 @@ $(window).on("scroll", function() {
 	var scrollHeight = $(document).height();
 	var scrollPosition = $(window).height() + $(window).scrollTop();
 	if ((scrollHeight - scrollPosition) / scrollHeight === 0 && poems) {
-		console.log("well need a reload", poems);
 		poemIndex++;
 		if (poemIndex <= poems.length){
 			let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);

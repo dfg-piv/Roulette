@@ -710,7 +710,6 @@ $( "#back2" ).click(function() {
     }
   }
 
-
 </script>
 
 </div>

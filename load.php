@@ -45,13 +45,7 @@ $c = $_POST['c'];
     	<div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="loading"><img src="images/icons/loading.gif" /></div> 
       <div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="poem"></div>
       <div id="back2" class="col-xs-2"><img src="images/icons/right.png" height="60" width="40" /></div>
-      </div>
-      <div class="row" id="poemFooter">
- 
-            <div  class="poemButton" ><a href="" target="_blank" id="visitPoem" onClick="ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));"><?php echo $vars['More'][$lang]; ?></a></div>
-
-      </div>
-    
+      </div>    
   </div>
   <div id="tag-slider" class="slider">
     <div class="row">
@@ -665,20 +659,18 @@ $( ".slotMachine, .machineResult" ).click(function() {
   gaPage = tagId.replace('../','virtual/');
   ga('send', 'pageview', gaPage);
   $.getJSON( tagId  , function(data) {
-		var test = data[0].content;	
-       $("#poem").hide().html(test).fadeIn('slow');
-  	$( "#loading" ).hide();
-	   var poemPath = $( "#poemPath" ).html();
-	$("#visitPoem").attr( "href", poemPath );
+		poems = data;
+		poemIndex = 0;
+		let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
+		$("#poem").hide().html(poem).fadeIn('slow');
+		$( "#loading" ).hide();
+		appendPoemButton();
   });
-	$("#poemFooter").fadeIn('slow');
-
 
 });
 
 // Method for hiding slide
 hideSlide = function() {
-	$("#poemFooter").fadeOut('fast');
 	$("#poem").fadeOut('fast');
  	$( "#toggle2" ).hide( "slide" , { direction: "left" }, 500 );
 }
@@ -709,6 +701,25 @@ $( "#back2" ).click(function() {
       }
     }
   }
+	
+$(window).on("scroll", function() {
+	var scrollHeight = $(document).height();
+	var scrollPosition = $(window).height() + $(window).scrollTop();
+	if ((scrollHeight - scrollPosition) / scrollHeight === 0 && poems) {
+		poemIndex++;
+		if (poemIndex <= poems.length){
+			let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
+			$("#poem").append(poem);
+			appendPoemButton();
+		}
+	}
+});
+
+appendPoemButton = () => {
+	$("#poem").append("</br><div  class='poemButton horizontal-center' ><a href='' target='_blank' id='visitPoem" + poemIndex + "' onClick='ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));'><?php echo $vars['More'][$lang]; ?></a></div></br>");
+	let poemPath = $("#poemPath" + poemIndex).html();
+	$("#visitPoem" + poemIndex).attr( "href", poemPath );
+}
 
 </script>
 

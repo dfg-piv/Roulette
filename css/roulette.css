@@ -321,6 +321,14 @@ body {
     margin-top: 20px
 }
 
+.horizontal-center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
 .poemButton a,
 .slotMachineButton {
 

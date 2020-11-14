@@ -664,7 +664,7 @@ $( ".slotMachine, .machineResult" ).click(function() {
 		let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
 		$("#poem").hide().html(poem).fadeIn('slow');
 		$( "#loading" ).hide();
-		 appendPoemButton();
+		appendPoemButton();
   });
 
 });

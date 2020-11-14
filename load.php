@@ -48,7 +48,7 @@ $c = $_POST['c'];
       </div>
       <div class="row" id="poemFooter">
  
-            <div  class="poemButton" ><a href="" id="visitPoem" onClick="ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));"><?php echo $vars['More'][$lang]; ?></a></div>
+            <div  class="poemButton" ><a href="" target="_blank" id="visitPoem" onClick="ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));"><?php echo $vars['More'][$lang]; ?></a></div>
 
       </div>
     

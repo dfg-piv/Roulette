@@ -472,3 +472,7 @@ button {
 .verse {
     margin-bottom: 25px
 }
+
+.heart {
+  max-height: 30px
+}

@@ -658,7 +658,7 @@ $( ".slotMachine, .machineResult" ).click(function() {
   var gaPage;
   gaPage = tagId.replace('../','virtual/');
   ga('send', 'pageview', gaPage);
-  $.getJSON( "https://www.poetryinvoice.com/" + tagId  , function(data) {
+  $.getJSON( tagId  , function(data) {
 		poems = data;
 		poemIndex = 0;
 		let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);

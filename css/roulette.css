@@ -477,6 +477,10 @@ button {
     margin-bottom: 25px
 }
 
+.heart {
+  max-height: 30px
+}
+
 hr.thick-line {
     border: 1px solid;
 }

@@ -709,6 +709,10 @@ $(window).on("scroll", function() {
 	if ((scrollHeight - scrollPosition) / scrollHeight === 0 && poems) {
 		poemIndex++;
 		if (poemIndex <= poems.length){
+			if (poemIndex < poems.length) {
+				$("#poem").append("<hr class='thick-line'>");
+			}
+
 			let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
 			$("#poem").append(poem);
 			appendLikeButton();
@@ -722,7 +726,7 @@ appendLikeButton = () => {
 }
 
 appendPoemButton = () => {
-	$("#poem").append("</br><div  class='poemButton horizontal-center' ><a href='' target='_blank' id='visitPoem" + poemIndex + "' onClick='ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));'><?php echo $vars['More'][$lang]; ?></a></div></br>");
+	$("#poem").append("<br><div  class='poemButton horizontal-center' ><a href='' target='_blank' id='visitPoem" + poemIndex + "' onClick='ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));'><?php echo $vars['More'][$lang]; ?></a></div></br></br>");
 	let poemPath = $("#poemPath" + poemIndex).html();
 	$("#visitPoem" + poemIndex).attr( "href", poemPath );
 }

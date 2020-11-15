@@ -43,9 +43,12 @@ $c = $_POST['c'];
   <div id="toggle2">&nbsp;
     <div class="row interactive">
     	<div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="loading"><img src="images/icons/loading.gif" /></div> 
-      <div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="poem"></div>
-      <div id="back2" class="col-xs-2"><img src="images/icons/right.png" height="60" width="40" /></div>
-      </div>    
+	  <div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="poem"></div>
+	  <div class="sticky">
+		<div id="back2" class="col-xs-2">
+			<img src="images/icons/right.png" height="60" width="40" /></div>
+		</div>
+	  </div> 
   </div>
   <div id="tag-slider" class="slider">
     <div class="row">

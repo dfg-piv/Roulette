@@ -1,4 +1,3 @@
-
 .logo,
 .slider-up {
     vertical-align: middle
@@ -483,4 +482,10 @@ button {
 
 hr.thick-line {
     border: 1px solid;
+}
+
+.sticky {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 2vh;
 }

@@ -748,7 +748,7 @@ storeFavPoem = (index) => {
 	favPoems.push({
 		title: title,
 		poet: poet,
-		moreInfoLink: poemPath
+		poemPath: poemPath
 	});
 
 	sessionStorage.setItem(favPoemKey, JSON.stringify(favPoems));
@@ -762,7 +762,7 @@ removeFavPoem = (index) => {
 		let favPoems = JSON.parse(sessionStorage.getItem(favPoemKey));
 
 		favPoems = favPoems.filter((favPoem) => {
-			return favPoem.moreInfoLink !== poemPath
+			return favPoem.poemPath !== poemPath
 		});
 
 		sessionStorage.setItem(favPoemKey, JSON.stringify(favPoems));

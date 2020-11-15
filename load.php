@@ -793,8 +793,6 @@ $(document).on('click', '.heart', (event) => {
 	}
 });
 
-const favPoemKey = "favPoems";
-
 $(document).on('click', '#favouritesButton', () => {
 	if ($("#topBar .dropdown").hasClass("open")){
 		let favPoems = (favPoemKey in sessionStorage) ? JSON.parse(sessionStorage.getItem(favPoemKey)) : [];

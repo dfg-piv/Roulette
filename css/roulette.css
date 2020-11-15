@@ -472,3 +472,7 @@ button {
 .verse {
     margin-bottom: 25px
 }
+
+hr.thick-line {
+    border: 1px solid;
+}

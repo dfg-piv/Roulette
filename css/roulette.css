@@ -473,11 +473,20 @@ button {
 }
 
 .verse {
-    margin-bottom: 25px
+    flex: 90%;
+    margin-bottom: 25px;
+}
+
+.heart-container {
+    flex: 10%;
 }
 
 .heart {
-  max-height: 30px
+  max-height: 30px;
+}
+
+.heart:hover {
+    cursor: pointer;
 }
 
 hr.thick-line {
@@ -488,4 +497,8 @@ hr.thick-line {
     position: -webkit-sticky; /* For Safari */
     position: sticky;
     top: 2vh;
+}
+
+.flex-container {
+    display: flex;
 }

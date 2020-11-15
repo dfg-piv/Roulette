@@ -727,7 +727,10 @@ $(window).on("scroll", function() {
 });
 
 appendLikeButton = () => {
-	$(".verse").last().after("<img src='images/icons/heart-outline.png' class='heart' data-index='" + poemIndex + "'/>");
+	$(".verse").last().wrap("<div class='flex-container'/>");
+	$(".verse").last().after("<img src='images/icons/heart-outline.png' class='heart' data-index='" + poemIndex + "'/></div>");
+	$(".heart").last().wrap("<div class='heart-container'/>");
+	// $(".verse:last").add($("img[class='heart'][data-index='" + poemIndex + "']")).wrapAll("<div class='hi'/>");
 }
 
 appendPoemButton = () => {

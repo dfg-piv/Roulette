@@ -1,3 +1,16 @@
+#topBar {
+  background-color: black;
+}
+
+#favouritesButton {
+  color: white;
+  background-color: #555;
+}
+
+#favouritesButton:hover {
+  background-color: #777;
+}
+
 .logo,
 .slider-up {
     vertical-align: middle

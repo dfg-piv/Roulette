@@ -52,9 +52,12 @@ $c = $_POST['c'];
   <div id="toggle2">&nbsp;
     <div class="row interactive">
     	<div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="loading"><img src="images/icons/loading.gif" /></div> 
-      <div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="poem"></div>
-      <div id="back2" class="col-xs-2"><img src="images/icons/right.png" height="60" width="40" /></div>
-      </div>    
+	  <div class=" col-sm-6 col-sm-offset-2 col-xs-10 " id="poem"></div>
+	  <div class="sticky">
+		<div id="back2" class="col-xs-2">
+			<img src="images/icons/right.png" height="60" width="40" /></div>
+		</div>
+	  </div> 
   </div>
   <div id="tag-slider" class="slider">
     <div class="row">
@@ -671,10 +674,11 @@ $( ".slotMachine, .machineResult" ).click(function() {
 		poems = data;
 		poemIndex = 0;
 		let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
-		$("#poem").hide().html(poem).fadeIn('slow');
+		$("#poem").hide().html("<div id='poem" + poemIndex + "'>" + poem).fadeIn('slow');
 		$( "#loading" ).hide();
 		appendLikeButton();
 		appendPoemButton();
+		$("#poem").append("</div>");
   });
 
 });
@@ -723,29 +727,69 @@ $(window).on("scroll", function() {
 			}
 
 			let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
-			$("#poem").append(poem);
+			$("#poem").append("<div id='poem" + poemIndex + "'>" + poem);
 			appendLikeButton();
 			appendPoemButton();
+			$("#poem").append("</div>");
 		}
 	}
 });
 
 appendLikeButton = () => {
-	$(".verse").last().after("<img src='images/icons/heart-outline.png' class='heart'/>");
+	$(".verse").last().after("<img src='images/icons/heart-outline.png' class='heart' data-index='" + poemIndex + "'/>");
 }
 
 appendPoemButton = () => {
 	$("#poem").append("<br><div  class='poemButton horizontal-center' ><a href='' target='_blank' id='visitPoem" + poemIndex + "' onClick='ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));'><?php echo $vars['More'][$lang]; ?></a></div></br></br>");
 	let poemPath = $("#poemPath" + poemIndex).html();
 	$("#visitPoem" + poemIndex).attr( "href", poemPath );
+	
+}
+
+// key for getting favPoems in session storage
+const favPoemKey = "favPoems";
+
+// Add poem to favourites in session storage
+storeFavPoem = (index) => {
+	let poemId = "#poem" + index;
+	let title = $(poemId + " h1:first").text();
+	let poet = $(poemId + " h4:first").text()
+	let poemPath = $("#visitPoem" + index).attr( "href");
+	let favPoems = (favPoemKey in sessionStorage) ? JSON.parse(sessionStorage.getItem(favPoemKey)) : [];
+
+	favPoems.push({
+		title: title,
+		poet: poet,
+		poemPath: poemPath
+	});
+
+	sessionStorage.setItem(favPoemKey, JSON.stringify(favPoems));
+}
+
+// Remove poem from favourites in session storage
+removeFavPoem = (index) => {
+	let poemPath = $("#visitPoem" + index).attr( "href");
+	
+	if (favPoemKey in sessionStorage) {
+		let favPoems = JSON.parse(sessionStorage.getItem(favPoemKey));
+
+		favPoems = favPoems.filter((favPoem) => {
+			return favPoem.poemPath !== poemPath
+		});
+
+		sessionStorage.setItem(favPoemKey, JSON.stringify(favPoems));
+	}
 }
 
 $(document).on('click', '.heart', (event) => {
 	let target = event.currentTarget;
+	let poemIndex = $(target).attr("data-index");
 	if ($(target).attr("src") === 'images/icons/heart-outline.png'){
 		$(target).attr("src","images/icons/heart-full.png");
+		storeFavPoem(poemIndex);
 	} else {
 		$(target).attr("src","images/icons/heart-outline.png");
+		removeFavPoem(poemIndex);
 	}
 });
 

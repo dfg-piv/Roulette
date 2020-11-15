@@ -14,7 +14,16 @@ $c = $_POST['c'];
 ?>
 <div class="container-fluid">
  
-
+	<div id="topBar" class="row">
+		<div class="dropdown">
+		  <button id="favouritesButton" class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+				Favourites
+		  	<span class="caret"></span>
+			</button>
+		  <ul id="favouritesDropdown" class="dropdown-menu">
+		  </ul>
+		</div>
+	</div>
   <div class="row logo">
     <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
     
@@ -754,7 +763,7 @@ storeFavPoem = (index) => {
 	favPoems.push({
 		title: title,
 		poet: poet,
-		moreInfoLink: poemPath
+		poemPath: poemPath
 	});
 
 	sessionStorage.setItem(favPoemKey, JSON.stringify(favPoems));
@@ -768,7 +777,7 @@ removeFavPoem = (index) => {
 		let favPoems = JSON.parse(sessionStorage.getItem(favPoemKey));
 
 		favPoems = favPoems.filter((favPoem) => {
-			return favPoem.moreInfoLink !== poemPath
+			return favPoem.poemPath !== poemPath
 		});
 
 		sessionStorage.setItem(favPoemKey, JSON.stringify(favPoems));
@@ -786,6 +795,21 @@ $(document).on('click', '.heart', (event) => {
 		removeFavPoem(poemIndex);
 	}
 });
+
+$(document).on('click', '#favouritesButton', () => {
+	if ($("#topBar .dropdown").hasClass("open")){
+		let favPoems = (favPoemKey in sessionStorage) ? JSON.parse(sessionStorage.getItem(favPoemKey)) : [];
+		if (favPoems === 0){
+			$("#favouritesDropdown").hide();
+		} else {
+			$("#favouritesDropdown").empty();
+			for (poem of favPoems){
+				$("#favouritesDropdown").append("<li><a href='" + poem.poemPath + "' target='_blank'>" + poem.title + " - " + poem.poet + "</a></li>");
+			}
+			$("#favouritesDropdown").show();
+		}
+	}
+})
 
 </script>
 

@@ -667,6 +667,7 @@ $( ".slotMachine, .machineResult" ).click(function() {
 		let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
 		$("#poem").hide().html(poem).fadeIn('slow');
 		$( "#loading" ).hide();
+		appendLikeButton();
 		appendPoemButton();
   });
 
@@ -717,16 +718,30 @@ $(window).on("scroll", function() {
 
 			let poem = poems[poemIndex].content.replace("poemPath", "poemPath" + poemIndex);
 			$("#poem").append(poem);
+			appendLikeButton();
 			appendPoemButton();
 		}
 	}
 });
+
+appendLikeButton = () => {
+	$(".verse").last().after("<img src='images/icons/heart-outline.png' class='heart'/>");
+}
 
 appendPoemButton = () => {
 	$("#poem").append("<br><div  class='poemButton horizontal-center' ><a href='' target='_blank' id='visitPoem" + poemIndex + "' onClick='ga('send', 'pageview',  $(this).attr('href').replace('https://www.poetryinvoice.com','/virtual/roulette-en'));'><?php echo $vars['More'][$lang]; ?></a></div></br></br>");
 	let poemPath = $("#poemPath" + poemIndex).html();
 	$("#visitPoem" + poemIndex).attr( "href", poemPath );
 }
+
+$(document).on('click', '.heart', (event) => {
+	let target = event.currentTarget;
+	if ($(target).attr("src") === 'images/icons/heart-outline.png'){
+		$(target).attr("src","images/icons/heart-full.png");
+	} else {
+		$(target).attr("src","images/icons/heart-outline.png");
+	}
+});
 
 </script>
 

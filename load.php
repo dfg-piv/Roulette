@@ -749,10 +749,12 @@ $(document).on('click', '.heart', (event) => {
 	}
 });
 
+const favPoemKey = "favPoems";
+
 $(document).on('click', '#favouritesButton', () => {
 	if ($("#topBar .dropdown").hasClass("open")){
-		var favPoems = sessionStorage.getItem(favPoems);
-		if (!favPoems || favPoems === 0){
+		let favPoems = (favPoemKey in sessionStorage) ? JSON.parse(sessionStorage.getItem(favPoemKey)) : [];
+		if (favPoems === 0){
 			$("#favouritesDropdown").hide();
 		} else {
 			$("#favouritesDropdown").empty();

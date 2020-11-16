@@ -11,6 +11,15 @@
   background-color: #777;
 }
 
+#favouritesDropdown li {
+  display: flex;
+  padding-left: 10px;
+}
+
+#favouritesDropdown a {
+  padding-left: 10px;
+}
+
 .logo,
 .slider-up {
     vertical-align: middle

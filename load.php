@@ -16,7 +16,7 @@ $c = $_POST['c'];
  
 	<div id="topBar" class="row">
 		<div class="dropdown">
-		  <button id="favouritesButton" class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+		  <button id="favouritesButton" class="btn dropdown-toggle" type="button">
 				Favourites
 		  	<span class="caret"></span>
 			</button>
@@ -767,9 +767,7 @@ storeFavPoem = (index) => {
 }
 
 // Remove poem from favourites in session storage
-removeFavPoem = (index) => {
-	let poemPath = $("#visitPoem" + index).attr( "href");
-	
+removeFavPoem = (poemPath) => {
 	if (favPoemKey in sessionStorage) {
 		let favPoems = JSON.parse(sessionStorage.getItem(favPoemKey));
 
@@ -789,26 +787,37 @@ $(document).on('click', '.heart', (event) => {
 		storeFavPoem(poemIndex);
 	} else {
 		$(target).attr("src","images/icons/heart-outline.png");
+		let poemPath = $("#visitPoem" + index).attr( "href");
 		removeFavPoem(poemIndex);
 	}
 });
 
-const favPoemKey = "favPoems";
-
 $(document).on('click', '#favouritesButton', () => {
-	if ($("#topBar .dropdown").hasClass("open")){
+	if ($("#favouritesDropdown").is(":hidden")){
 		let favPoems = (favPoemKey in sessionStorage) ? JSON.parse(sessionStorage.getItem(favPoemKey)) : [];
 		if (favPoems === 0){
 			$("#favouritesDropdown").hide();
 		} else {
 			$("#favouritesDropdown").empty();
 			for (poem of favPoems){
-				$("#favouritesDropdown").append("<li><a href='" + poem.poemPath + "' target='_blank'>" + poem.title + " - " + poem.poet + "</a></li>");
+				$("#favouritesDropdown").append("<li>" +
+					"<button type='button' class='close'><span>&times;</span></button>" +
+					"<a href='" + poem.poemPath + "' target='_blank'>" + poem.title + " - " + poem.poet + "</a>" +
+					"</li>");
 			}
 			$("#favouritesDropdown").show();
 		}
+	} else {
+		$("#favouritesDropdown").hide();
 	}
-})
+});
+
+$(document).on('click', '.close', (event) => {
+	let target = event.currentTarget;
+	let poemPath = $(target).next().attr("href");
+	removeFavPoem(poemPath);
+	$(target).parent().remove();
+});
 
 </script>
 

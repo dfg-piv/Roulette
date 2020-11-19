@@ -790,10 +790,22 @@ $(document).on('click', '.heart', (event) => {
 		storeFavPoem(poemIndex);
 	} else {
 		$(target).attr("src","images/icons/heart-outline.png");
-		let poemPath = $("#visitPoem" + index).attr( "href");
-		removeFavPoem(poemIndex);
+		let poemPath = $("#visitPoem" + poemIndex).attr( "href");
+		removeFavPoem(poemPath);
 	}
+	updateFavouritesDropdown();
 });
+
+updateFavouritesDropdown = () => {
+	let favPoems = (favPoemKey in sessionStorage) ? JSON.parse(sessionStorage.getItem(favPoemKey)) : [];
+	$("#favouritesDropdown").empty();
+	for (poem of favPoems){
+		$("#favouritesDropdown").append("<li>" +
+			"<button type='button' class='close'><span>&times;</span></button>" +
+			"<a href='" + poem.poemPath + "' target='_blank'>" + poem.title + " - " + poem.poet + "</a>" +
+			"</li>");
+	}
+}
 
 $(document).on('click', '#favouritesButton', () => {
 	if ($("#favouritesDropdown").is(":hidden")){
@@ -801,13 +813,7 @@ $(document).on('click', '#favouritesButton', () => {
 		if (favPoems === 0){
 			$("#favouritesDropdown").hide();
 		} else {
-			$("#favouritesDropdown").empty();
-			for (poem of favPoems){
-				$("#favouritesDropdown").append("<li>" +
-					"<button type='button' class='close'><span>&times;</span></button>" +
-					"<a href='" + poem.poemPath + "' target='_blank'>" + poem.title + " - " + poem.poet + "</a>" +
-					"</li>");
-			}
+			updateFavouritesDropdown();
 			$("#favouritesDropdown").show();
 		}
 	} else {
@@ -820,6 +826,14 @@ $(document).on('click', '.close', (event) => {
 	let poemPath = $(target).next().attr("href");
 	removeFavPoem(poemPath);
 	$(target).parent().remove();
+
+	// Unfill heart if poem is visible
+	$("a[id^=visitPoem]").each((index, node) => {
+		if ($(node).attr("href") === poemPath) {
+			let poemIndex = $(node).attr("id").substring(9);
+			$("img[class='heart'][data-index='"+ poemIndex +"']").attr("src","images/icons/heart-outline.png");
+		};
+	});
 });
 
 </script>
